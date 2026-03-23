@@ -21,23 +21,23 @@
 .pw-error{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#ef4444;letter-spacing:1px;min-height:16px}
 
 :root{
-  --bg:#060d14;
-  --bg2:#0a1520;
-  --bg3:#0f1e2e;
-  --bg4:#142438;
-  --teal:#00B4D8;
-  --teal2:#0891b2;
-  --teal3:rgba(0,180,216,0.12);
-  --teal4:rgba(0,180,216,0.06);
-  --green:#10b981;
-  --red:#ef4444;
-  --amber:#f59e0b;
-  --violet:#8b5cf6;
-  --text:#e8f4f8;
-  --text2:#8bb4c8;
-  --text3:#4a6e82;
-  --border:rgba(0,180,216,0.15);
-  --border2:rgba(0,180,216,0.08);
+  --bg:#f5f7fc;
+  --bg2:#ffffff;
+  --bg3:#eef1f8;
+  --bg4:#e4e9f5;
+  --teal:#0094b8;
+  --teal2:#0078a0;
+  --teal3:rgba(0,148,184,0.1);
+  --teal4:rgba(0,148,184,0.05);
+  --green:#059669;
+  --red:#dc2626;
+  --amber:#d97706;
+  --violet:#7c3aed;
+  --text:#0f172a;
+  --text2:#334155;
+  --text3:#64748b;
+  --border:rgba(0,148,184,0.25);
+  --border2:rgba(0,148,184,0.12);
   --mono:'IBM Plex Mono',monospace;
   --sans:'Space Grotesk',sans-serif;
   --radius:10px;
@@ -58,8 +58,8 @@ body::before{
   position:fixed;
   inset:0;
   background-image:
-    linear-gradient(rgba(0,180,216,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,180,216,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(0,148,184,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,148,184,0.06) 1px, transparent 1px);
   background-size:40px 40px;
   pointer-events:none;
   z-index:0;
@@ -70,7 +70,7 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:16px 40px;
-  background:rgba(6,13,20,0.85);
+  background:rgba(245,247,252,0.92);
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border2);
 }
@@ -88,7 +88,7 @@ nav{
 .nav-links a:hover{color:var(--teal)}
 .nav-badge{
   font-family:var(--mono);font-size:10px;font-weight:600;
-  color:var(--bg);background:var(--teal);
+  color:#ffffff;background:var(--teal);
   padding:4px 10px;border-radius:20px;letter-spacing:1px;
 }
 
@@ -124,7 +124,7 @@ nav{
 .btn-primary{
   font-family:var(--mono);font-size:12px;font-weight:700;
   letter-spacing:1.5px;text-transform:uppercase;
-  background:var(--teal);color:var(--bg);
+  background:var(--teal);color:#ffffff;
   border:none;padding:14px 28px;border-radius:6px;
   cursor:pointer;transition:all .2s;
 }
@@ -563,6 +563,96 @@ nav{
         <div style="font-size:13px;color:var(--text2);font-weight:500">BCP Partners — Investor Network · Referral Distribution · KYA Pilot</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ── PROBLEM / SOLUTION ── -->
+<section style="position:relative;z-index:1;padding:60px 40px;max-width:1100px;margin:0 auto">
+  <div style="text-align:center;margin-bottom:40px">
+    <div style="font-family:var(--mono);font-size:11px;font-weight:700;color:var(--teal);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px">Two Perspectives · One Protocol</div>
+    <h2 style="font-size:32px;font-weight:600;color:var(--text)">Who benefits from Verun?</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+
+    <!-- AI AGENT column -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--text3);letter-spacing:2px;text-transform:uppercase;text-align:center;padding:6px 0;border-bottom:2px solid var(--border)">AI AGENT</div>
+
+      <!-- Problem Agent -->
+      <div style="background:#fff5f5;border:1px solid rgba(220,38,38,0.25);border-radius:12px;padding:22px 24px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span style="color:#dc2626;font-size:15px">⚠</span>
+          <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:#dc2626;letter-spacing:2px">THE PROBLEM</span>
+        </div>
+        <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px">AI agents operating in regulated finance — nobody verifies them. No identity, no trust score, no access.</p>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <div style="background:#fff;border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">AI Agent<br><span style="font-size:10px;color:#dc2626">Unknown</span></div>
+          <span style="color:var(--text3)">→</span>
+          <div style="background:#fff;border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Operation<br><span style="font-size:10px;color:#dc2626">Unverified</span></div>
+          <span style="color:var(--text3)">→</span>
+          <div style="background:#fff;border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Audit<br><span style="font-size:10px;color:#dc2626">None</span></div>
+        </div>
+        <div style="margin-top:14px;padding:10px 14px;background:rgba(220,38,38,0.06);border-radius:6px;font-size:12px;font-weight:600;color:#dc2626">No identity. No accountability. Full exposure.</div>
+      </div>
+
+      <!-- Solution Agent -->
+      <div style="background:#f0fdf8;border:1px solid rgba(5,150,105,0.3);border-radius:12px;padding:22px 24px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span style="color:#059669;font-size:15px">✓</span>
+          <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:#059669;letter-spacing:2px">THE SOLUTION</span>
+        </div>
+        <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px">Verun issues an on-chain KYA Trust Score via ASA Token. 2-of-3 validator consensus grants access to regulated platforms — instantly.</p>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">AI Agent<br><span style="font-size:10px;color:#059669">Score 820</span></div>
+          <span style="color:var(--text3)">→</span>
+          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Verun KYA<br><span style="font-size:10px;color:#059669">2-of-3 Vote</span></div>
+          <span style="color:var(--text3)">→</span>
+          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">ALLOW ✓<br><span style="font-size:10px;color:#059669">Algorand</span></div>
+        </div>
+        <div style="margin-top:14px;padding:10px 14px;background:rgba(5,150,105,0.06);border-radius:6px;font-size:12px;font-weight:600;color:#059669">KYA verified · On-chain audit · ~3.3s finality</div>
+      </div>
+    </div>
+
+    <!-- INSTITUTION / VALIDATOR column -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--text3);letter-spacing:2px;text-transform:uppercase;text-align:center;padding:6px 0;border-bottom:2px solid var(--border)">TOKENFORGE · BANK · VALIDATOR</div>
+
+      <!-- Problem Institution -->
+      <div style="background:#fff5f5;border:1px solid rgba(220,38,38,0.25);border-radius:12px;padding:22px 24px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span style="color:#dc2626;font-size:15px">⚠</span>
+          <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:#dc2626;letter-spacing:2px">THE PROBLEM</span>
+        </div>
+        <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px">Financial institutions can't identify who — or what — is calling their API. AI agents leave no compliance trail, creating full liability exposure.</p>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <div style="background:#fff;border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">API Call<br><span style="font-size:10px;color:#dc2626">Unknown source</span></div>
+          <span style="color:var(--text3)">→</span>
+          <div style="background:#fff;border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Platform<br><span style="font-size:10px;color:#dc2626">No check</span></div>
+          <span style="color:var(--text3)">→</span>
+          <div style="background:#fff;border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Liability<br><span style="font-size:10px;color:#dc2626">Full risk</span></div>
+        </div>
+        <div style="margin-top:14px;padding:10px 14px;background:rgba(220,38,38,0.06);border-radius:6px;font-size:12px;font-weight:600;color:#dc2626">No traceability. No MiCAR compliance. Full exposure.</div>
+      </div>
+
+      <!-- Solution Institution -->
+      <div style="background:#f0fdf8;border:1px solid rgba(5,150,105,0.3);border-radius:12px;padding:22px 24px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span style="color:#059669;font-size:15px">✓</span>
+          <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:#059669;letter-spacing:2px">THE SOLUTION</span>
+        </div>
+        <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px">Become a Verun Validator Node — zero setup required. Every verified agent transaction earns your institution 10% auto-referral, with full on-chain audit trail.</p>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Institution<br><span style="font-size:10px;color:#059669">Validator Node</span></div>
+          <span style="color:var(--text3)">→</span>
+          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Verun Vote<br><span style="font-size:10px;color:#059669">KYA consensus</span></div>
+          <span style="color:var(--text3)">→</span>
+          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Earn 10%<br><span style="font-size:10px;color:#059669">Auto-referral</span></div>
+        </div>
+        <div style="margin-top:14px;padding:10px 14px;background:rgba(5,150,105,0.06);border-radius:6px;font-size:12px;font-weight:600;color:#059669">MiCAR-ready · Full audit trail · Revenue share built-in</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
