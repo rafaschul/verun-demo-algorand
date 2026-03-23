@@ -575,16 +575,13 @@ nav{
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
 
-    <!-- AI AGENT column -->
+    <!-- LEFT: PROBLEMS -->
     <div style="display:flex;flex-direction:column;gap:16px">
-      <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--text3);letter-spacing:2px;text-transform:uppercase;text-align:center;padding:6px 0;border-bottom:2px solid var(--border)">AI AGENT</div>
+      <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:#dc2626;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:6px 0;border-bottom:2px solid rgba(220,38,38,0.3)">⚠ THE PROBLEM</div>
 
       <!-- Problem Agent -->
       <div style="background:#fff5f5;border:1px solid rgba(220,38,38,0.25);border-radius:12px;padding:22px 24px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-          <span style="color:#dc2626;font-size:15px">⚠</span>
-          <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:#dc2626;letter-spacing:2px">THE PROBLEM</span>
-        </div>
+        <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">FOR AI AGENTS</div>
         <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px">AI agents operating in regulated finance — nobody verifies them. No identity, no trust score, no access.</p>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <div style="background:#fff;border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">AI Agent<br><span style="font-size:10px;color:#dc2626">Unknown</span></div>
@@ -596,34 +593,9 @@ nav{
         <div style="margin-top:14px;padding:10px 14px;background:rgba(220,38,38,0.06);border-radius:6px;font-size:12px;font-weight:600;color:#dc2626">No identity. No accountability. Full exposure.</div>
       </div>
 
-      <!-- Solution Agent -->
-      <div style="background:#f0fdf8;border:1px solid rgba(5,150,105,0.3);border-radius:12px;padding:22px 24px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-          <span style="color:#059669;font-size:15px">✓</span>
-          <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:#059669;letter-spacing:2px">THE SOLUTION</span>
-        </div>
-        <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px">Verun issues an on-chain KYA Trust Score via ASA Token. 2-of-3 validator consensus grants access to regulated platforms — instantly.</p>
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">AI Agent<br><span style="font-size:10px;color:#059669">Score 820</span></div>
-          <span style="color:var(--text3)">→</span>
-          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Verun KYA<br><span style="font-size:10px;color:#059669">2-of-3 Vote</span></div>
-          <span style="color:var(--text3)">→</span>
-          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">ALLOW ✓<br><span style="font-size:10px;color:#059669">Algorand</span></div>
-        </div>
-        <div style="margin-top:14px;padding:10px 14px;background:rgba(5,150,105,0.06);border-radius:6px;font-size:12px;font-weight:600;color:#059669">KYA verified · On-chain audit · ~3.3s finality</div>
-      </div>
-    </div>
-
-    <!-- INSTITUTION / VALIDATOR column -->
-    <div style="display:flex;flex-direction:column;gap:16px">
-      <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--text3);letter-spacing:2px;text-transform:uppercase;text-align:center;padding:6px 0;border-bottom:2px solid var(--border)">TOKENFORGE · BANK · VALIDATOR</div>
-
       <!-- Problem Institution -->
       <div style="background:#fff5f5;border:1px solid rgba(220,38,38,0.25);border-radius:12px;padding:22px 24px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-          <span style="color:#dc2626;font-size:15px">⚠</span>
-          <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:#dc2626;letter-spacing:2px">THE PROBLEM</span>
-        </div>
+        <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">FOR TOKENFORGE · BANK</div>
         <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px">Financial institutions can't identify who — or what — is calling their API. AI agents leave no compliance trail, creating full liability exposure.</p>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <div style="background:#fff;border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">API Call<br><span style="font-size:10px;color:#dc2626">Unknown source</span></div>
@@ -634,13 +606,29 @@ nav{
         </div>
         <div style="margin-top:14px;padding:10px 14px;background:rgba(220,38,38,0.06);border-radius:6px;font-size:12px;font-weight:600;color:#dc2626">No traceability. No MiCAR compliance. Full exposure.</div>
       </div>
+    </div>
+
+    <!-- RIGHT: SOLUTIONS -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:#059669;letter-spacing:2px;text-transform:uppercase;text-align:center;padding:6px 0;border-bottom:2px solid rgba(5,150,105,0.3)">✓ THE SOLUTION</div>
+
+      <!-- Solution Agent -->
+      <div style="background:#f0fdf8;border:1px solid rgba(5,150,105,0.3);border-radius:12px;padding:22px 24px">
+        <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">FOR AI AGENTS</div>
+        <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px">Verun issues an on-chain KYA Trust Score via ASA Token. 2-of-3 validator consensus grants access to regulated platforms — instantly.</p>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">AI Agent<br><span style="font-size:10px;color:#059669">Score 820</span></div>
+          <span style="color:var(--text3)">→</span>
+          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Verun KYA<br><span style="font-size:10px;color:#059669">2-of-3 Vote</span></div>
+          <span style="color:var(--text3)">→</span>
+          <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">ALLOW ✓<br><span style="font-size:10px;color:#059669">Algorand</span></div>
+        </div>
+        <div style="margin-top:14px;padding:10px 14px;background:rgba(5,150,105,0.06);border-radius:6px;font-size:12px;font-weight:600;color:#059669">KYA verified · On-chain audit · ~3.3s finality</div>
+      </div>
 
       <!-- Solution Institution -->
       <div style="background:#f0fdf8;border:1px solid rgba(5,150,105,0.3);border-radius:12px;padding:22px 24px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-          <span style="color:#059669;font-size:15px">✓</span>
-          <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:#059669;letter-spacing:2px">THE SOLUTION</span>
-        </div>
+        <div style="font-family:var(--mono);font-size:9px;font-weight:700;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">FOR TOKENFORGE · BANK · VALIDATOR</div>
         <p style="font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px">Become a Verun Validator Node — zero setup required. Every verified agent transaction earns your institution 10% auto-referral, with full on-chain audit trail.</p>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <div style="background:#fff;border:1px solid rgba(5,150,105,0.2);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:500;color:var(--text)">Institution<br><span style="font-size:10px;color:#059669">Validator Node</span></div>
