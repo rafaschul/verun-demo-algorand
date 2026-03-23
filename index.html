@@ -558,10 +558,10 @@ nav{
     </div>
   </div>
   <div class="nav-links">
-    <a href="#">overview</a>
-    <a href="#">kya protocol</a>
-    <a href="#">x402</a>
-    <a href="#">validators</a>
+    <a href="#hero" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'});return false;">overview</a>
+    <a href="#demo" onclick="jumpToStep(1);return false;">kya protocol</a>
+    <a href="#demo" onclick="jumpToStep(2);return false;">x402</a>
+    <a href="#demo" onclick="jumpToStep(1);return false;">validators</a>
   </div>
   <div style="display:flex;align-items:center;gap:16px">
     <div style="display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
@@ -572,7 +572,7 @@ nav{
   </div>
 </nav>
 
-<section class="hero">
+<section class="hero" id="hero">
   <div>
     <div class="hero-eyebrow">Verun Protocol · Live Demo</div>
     <h1>Trust-gated <em>agentic</em> finance.</h1>
@@ -1141,6 +1141,14 @@ function prevStep() {
     clearTerminal();
     renderStep();
   }
+}
+
+function jumpToStep(idx) {
+  const max = totalSteps() - 1;
+  currentStep = Math.min(idx, max);
+  clearTerminal();
+  renderStep();
+  document.getElementById('demo').scrollIntoView({behavior:'smooth'});
 }
 
 // ── Init ──
