@@ -9,43 +9,16 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 /* ── PASSWORD GATE ── */
-#pw-gate{
-  position:fixed;inset:0;z-index:9999;
-  background:#060d14;
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:24px;
-}
+#pw-gate{position:fixed;inset:0;z-index:9999;background:#060d14;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px}
 #pw-gate.hidden{display:none}
-.pw-logo{height:48px;width:auto;margin-bottom:8px}
-.pw-title{
-  font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;
-  color:#00B4D8;letter-spacing:3px;text-transform:uppercase;
-}
-.pw-sub{
-  font-family:'Space Grotesk',sans-serif;font-size:13px;color:#4a6e82;
-  letter-spacing:1px;
-}
+.pw-title{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;color:#00B4D8;letter-spacing:3px;text-transform:uppercase}
+.pw-sub{font-family:'Space Grotesk',sans-serif;font-size:13px;color:#4a6e82;letter-spacing:1px}
 .pw-form{display:flex;gap:10px;align-items:center}
-.pw-input{
-  font-family:'IBM Plex Mono',monospace;font-size:13px;
-  background:#0a1520;color:#e8f4f8;
-  border:1px solid rgba(0,180,216,0.3);border-radius:6px;
-  padding:10px 16px;outline:none;width:220px;letter-spacing:1px;
-  transition:border-color .2s;
-}
+.pw-input{font-family:'IBM Plex Mono',monospace;font-size:13px;background:#0a1520;color:#e8f4f8;border:1px solid rgba(0,180,216,0.3);border-radius:6px;padding:10px 16px;outline:none;width:220px;letter-spacing:1px;transition:border-color .2s}
 .pw-input:focus{border-color:#00B4D8}
-.pw-btn{
-  font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;
-  letter-spacing:1.5px;text-transform:uppercase;
-  background:#00B4D8;color:#060d14;
-  border:none;padding:11px 20px;border-radius:6px;
-  cursor:pointer;transition:background .2s;
-}
+.pw-btn{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:#00B4D8;color:#060d14;border:none;padding:11px 20px;border-radius:6px;cursor:pointer;transition:background .2s}
 .pw-btn:hover{background:#0dd6ff}
-.pw-error{
-  font-family:'IBM Plex Mono',monospace;font-size:11px;
-  color:#ef4444;letter-spacing:1px;min-height:16px;
-}
+.pw-error{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#ef4444;letter-spacing:1px;min-height:16px}
 
 :root{
   --bg:#060d14;
@@ -69,20 +42,6 @@
   --sans:'Space Grotesk',sans-serif;
   --radius:10px;
 }
-
-/* ── FOOTER ── */
-footer.impressum{
-  position:relative;z-index:1;
-  text-align:center;padding:24px 40px;
-  border-top:1px solid rgba(0,180,216,0.08);
-  margin-top:40px;
-}
-footer.impressum p{
-  font-family:'IBM Plex Mono',monospace;font-size:10px;
-  color:#4a6e82;letter-spacing:1.5px;
-}
-footer.impressum a{color:#4a6e82;text-decoration:none;transition:color .2s}
-footer.impressum a:hover{color:#00B4D8}
 
 html{scroll-behavior:smooth}
 body{
@@ -550,18 +509,12 @@ nav{
 </div>
 
 <nav>
-  <div style="display:flex;align-items:center;gap:12px">
-    <img src="logo.png" style="height:28px;width:auto" alt="BCP Partners">
-    <div>
-      <div class="nav-brand">◈ VERUN<span>.NETWORK</span></div>
-      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:2px">by erster</div>
-    </div>
-  </div>
+  <div class="nav-brand">◈ VERUN<span>.NETWORK</span></div>
   <div class="nav-links">
-    <a href="#hero" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'});return false;">overview</a>
-    <a href="#demo" onclick="jumpToStep(1);return false;">kya protocol</a>
-    <a href="#demo" onclick="jumpToStep(2);return false;">x402</a>
-    <a href="#demo" onclick="jumpToStep(1);return false;">validators</a>
+    <a href="#overview" onclick="smoothNav('overview',event)">overview</a>
+    <a href="#section-kya" onclick="smoothNav('section-kya',event)">kya protocol</a>
+    <a href="#section-x402" onclick="smoothNav('section-x402',event)">x402</a>
+    <a href="#section-validators" onclick="smoothNav('section-validators',event)">validators</a>
   </div>
   <div style="display:flex;align-items:center;gap:16px">
     <div style="display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)">
@@ -572,7 +525,7 @@ nav{
   </div>
 </nav>
 
-<section class="hero" id="hero">
+<section class="hero" id="overview">
   <div>
     <div class="hero-eyebrow">Verun Protocol · Live Demo</div>
     <h1>Trust-gated <em>agentic</em> finance.</h1>
@@ -1143,40 +1096,496 @@ function prevStep() {
   }
 }
 
-function jumpToStep(idx) {
-  const max = totalSteps() - 1;
-  currentStep = Math.min(idx, max);
-  clearTerminal();
-  renderStep();
-  document.getElementById('demo').scrollIntoView({behavior:'smooth'});
-}
-
 // ── Init ──
 renderStep();
 
-// ── Password Gate ──
-(function(){
-  if(sessionStorage.getItem('verun_auth')==='1'){
-    document.getElementById('pw-gate').classList.add('hidden');
-  }
-})();
+// ── Nav jump helpers ──
+function smoothNav(id, e) {
+  if(e) e.preventDefault();
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function jumpToStep(target, e) {
+  if(e) e.preventDefault();
+  // Map nav label → step index (for verified agent flow)
+  const map = { kya:1, x402:2, validators:1 };
+  if(agentType !== 'verified') setAgent('verified');
+  const idx = (map[target] !== undefined) ? map[target] : 0;
+  currentStep = idx;
+  clearTerminal();
+  renderStep();
+  setTimeout(()=>{ document.getElementById('demo').scrollIntoView({behavior:'smooth'}); }, 50);
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION: KYA PROTOCOL
+═══════════════════════════════════════════════════════════ -->
+<section id="section-kya" style="position:relative;z-index:1;padding:80px 40px;max-width:1100px;margin:0 auto">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+    <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--teal);letter-spacing:3px;text-transform:uppercase">◈ KYA Protocol</span>
+  </div>
+  <h2 style="font-size:38px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.1">Know Your <span style="background:linear-gradient(135deg,var(--teal),#60efff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Agent.</span></h2>
+  <p style="font-size:16px;color:var(--text2);max-width:560px;line-height:1.7;margin-bottom:48px">Every AI agent in regulated finance needs an on-chain identity. KYA assigns a sybil-resistant Trust Score via 2-of-3 validator consensus — gating every operation before it touches tokenized assets.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:40px">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px">
+      <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--teal);margin-bottom:6px">2/3</div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:2px;margin-bottom:8px">CONSENSUS</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Independent validator nodes must agree on every verdict. No single point of manipulation.</div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px">
+      <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--teal);margin-bottom:6px">ASA</div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:2px;margin-bottom:8px">TRUST TOKEN</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Non-transferable Algorand Standard Asset. Clawback + freeze enabled. Sybil-resistant by design.</div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px">
+      <div style="font-family:var(--mono);font-size:28px;font-weight:700;color:var(--teal);margin-bottom:6px">ARC-52</div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:2px;margin-bottom:8px">SIGNING STANDARD</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Agent wallet signing via Algorand ARC-52. Every payment transaction cryptographically attributed.</div>
+    </div>
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:28px">
+    <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--text3);letter-spacing:2px;margin-bottom:20px">SCORE TIERS · ACCESS LEVELS</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:8px;border:1px solid var(--border2)">
+        <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--text3)">0</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--text3);letter-spacing:1px;margin:4px 0">UNREGISTERED</div>
+        <div style="font-size:11px;color:var(--text3)">No access · Blocked</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:rgba(0,180,216,0.06);border-radius:8px;border:1px solid rgba(0,180,216,0.2)">
+        <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--teal)">300+</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--teal2);letter-spacing:1px;margin:4px 0">READ ONLY</div>
+        <div style="font-size:11px;color:var(--text2)">API access · No minting</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:rgba(0,180,216,0.08);border-radius:8px;border:1px solid rgba(0,180,216,0.3)">
+        <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--teal)">500+</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--teal2);letter-spacing:1px;margin:4px 0">MINT / TRANSFER</div>
+        <div style="font-size:11px;color:var(--text2)">x402 payments · eWpG ops</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:rgba(16,185,129,0.08);border-radius:8px;border:1px solid rgba(16,185,129,0.3)">
+        <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--green)">600+</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--green);letter-spacing:1px;margin:4px 0">FULL ORDER</div>
+        <div style="font-size:11px;color:var(--text2)">Investment orders · Full ops</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:24px;text-align:center">
+    <button class="btn-primary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'});setAgent('verified');currentStep=1;clearTerminal();renderStep()">→ Run KYA Demo Live</button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION: x402
+═══════════════════════════════════════════════════════════ -->
+<section id="section-x402" style="position:relative;z-index:1;padding:80px 40px;max-width:1100px;margin:0 auto;border-top:1px solid var(--border2)">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+    <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--amber);letter-spacing:3px;text-transform:uppercase">⚡ x402 Protocol</span>
+  </div>
+  <h2 style="font-size:38px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.1">Machine-native <span style="background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">micropayments.</span></h2>
+  <p style="font-size:16px;color:var(--text2);max-width:560px;line-height:1.7;margin-bottom:48px">GoPlausible facilitates x402 payments natively on Algorand. Agents pay per evaluation — no Coinbase CDP required. Instant finality in ~3.3 seconds. First x402 implementation on Algorand.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px">
+      <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--amber);letter-spacing:2px;margin-bottom:16px">4-STEP PROTOCOL</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--amber);width:20px;flex-shrink:0">①</span>
+          <span style="font-size:13px;color:var(--text2)">GET /resource → 402 returned with paymentRequirements</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--amber);width:20px;flex-shrink:0">②</span>
+          <span style="font-size:13px;color:var(--text2)">Agent constructs paymentGroup + signs with ARC-52 wallet</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--amber);width:20px;flex-shrink:0">③</span>
+          <span style="font-size:13px;color:var(--text2)">GoPlausible verifies ASA token on-chain + simulates tx</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--amber);width:20px;flex-shrink:0">④</span>
+          <span style="font-size:13px;color:var(--text2)">Submit to Algorand → instant finality → 200 OK + resource</span>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px">
+      <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--text3);letter-spacing:2px;margin-bottom:16px">vs. TRADITIONAL</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border2);font-family:var(--mono);font-size:11px">
+          <span style="color:var(--text3)">Settlement</span>
+          <span style="color:var(--green)">~3.3s ✓</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border2);font-family:var(--mono);font-size:11px">
+          <span style="color:var(--text3)">CDP required</span>
+          <span style="color:var(--green)">No ✓</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border2);font-family:var(--mono);font-size:11px">
+          <span style="color:var(--text3)">Chain</span>
+          <span style="color:var(--teal)">Algorand native</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;font-family:var(--mono);font-size:11px">
+          <span style="color:var(--text3)">Trust gate</span>
+          <span style="color:var(--teal)">ASA token check</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Full technical sequence diagram -->
+  <div style="margin-top:40px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--amber);letter-spacing:2px;text-transform:uppercase">Technical Sequence — Full Flow</div>
+      <button onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'});setAgent('verified');currentStep=2;clearTerminal();renderStep()" style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;background:transparent;border:1px solid rgba(245,158,11,0.3);color:var(--amber);padding:7px 16px;border-radius:5px;cursor:pointer;letter-spacing:.5px">→ Run Interactive Demo</button>
+    </div>
+    <div style="background:#f8fafc;border-radius:14px;padding:28px 20px;overflow-x:auto">
+      <svg viewBox="0 0 720 1240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:720px;height:auto;display:block;margin:0 auto;font-family:'IBM Plex Mono',monospace">
+
+        <!-- Title -->
+        <text x="360" y="20" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">x402 payment flow — Algorand / Verun</text>
+        <text x="360" y="36" font-size="9" fill="#64748b" text-anchor="middle">AI Agent · Verun resource gate · GoPlausible facilitator · Algorand mainnet</text>
+
+        <!-- Lane headers -->
+        <rect x="10" y="46" width="110" height="44" rx="7" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.2"/>
+        <text x="65" y="64" font-size="11" font-weight="700" fill="#4c1d95" text-anchor="middle">AI Agent</text>
+        <text x="65" y="79" font-size="8" fill="#6d28d9" text-anchor="middle">client</text>
+
+        <rect x="170" y="46" width="118" height="44" rx="7" fill="#e0f2fe" stroke="#0891b2" stroke-width="1.2"/>
+        <text x="229" y="64" font-size="11" font-weight="700" fill="#0c4a6e" text-anchor="middle">Verun</text>
+        <text x="229" y="79" font-size="8" fill="#0891b2" text-anchor="middle">resource gate</text>
+
+        <rect x="338" y="46" width="128" height="44" rx="7" fill="#fef3c7" stroke="#d97706" stroke-width="1.2"/>
+        <text x="402" y="64" font-size="11" font-weight="700" fill="#78350f" text-anchor="middle">GoPlausible</text>
+        <text x="402" y="79" font-size="8" fill="#b45309" text-anchor="middle">facilitator</text>
+
+        <rect x="516" y="46" width="190" height="44" rx="7" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
+        <text x="611" y="64" font-size="11" font-weight="700" fill="#1e3a8a" text-anchor="middle">Algorand</text>
+        <text x="611" y="79" font-size="8" fill="#1d4ed8" text-anchor="middle">mainnet</text>
+
+        <!-- Lifelines -->
+        <line x1="65"  y1="90" x2="65"  y2="1190" stroke="#cbd5e1" stroke-width="0.7" stroke-dasharray="4 3"/>
+        <line x1="229" y1="90" x2="229" y2="1190" stroke="#cbd5e1" stroke-width="0.7" stroke-dasharray="4 3"/>
+        <line x1="402" y1="90" x2="402" y2="1190" stroke="#cbd5e1" stroke-width="0.7" stroke-dasharray="4 3"/>
+        <line x1="611" y1="90" x2="611" y2="1190" stroke="#cbd5e1" stroke-width="0.7" stroke-dasharray="4 3"/>
+
+        <defs>
+          <marker id="arr-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/></marker>
+          <marker id="arr-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round"/></marker>
+          <marker id="arr-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#d97706" stroke-width="1.5" stroke-linecap="round"/></marker>
+          <marker id="arr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round"/></marker>
+          <marker id="arr-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#0891b2" stroke-width="1.5" stroke-linecap="round"/></marker>
+        </defs>
+
+        <!-- ── HAPPY PATH banner ── -->
+        <rect x="10" y="102" width="700" height="16" rx="3" fill="#dcfce7"/>
+        <text x="360" y="113" font-size="8" font-weight="700" fill="#166534" text-anchor="middle">HAPPY PATH</text>
+
+        <!-- 1 GET /resource -->
+        <text x="148" y="137" font-size="8.5" fill="#475569" text-anchor="middle">1 · GET /resource</text>
+        <line x1="65" y1="143" x2="222" y2="143" stroke="#16a34a" stroke-width="1.2" marker-end="url(#arr-g)"/>
+
+        <!-- 2 402 + paymentRequirements -->
+        <rect x="150" y="155" width="158" height="20" rx="4" fill="#e0f2fe" stroke="#7dd3fc" stroke-width="0.8"/>
+        <text x="229" y="168" font-size="8" fill="#0c4a6e" text-anchor="middle" dominant-baseline="central">402 + paymentRequirements</text>
+        <line x1="229" y1="175" x2="72" y2="175" stroke="#0891b2" stroke-width="1.2" marker-end="url(#arr-t)"/>
+
+        <!-- 3 construct paymentGroup -->
+        <rect x="10" y="188" width="112" height="18" rx="4" fill="#ede9fe" stroke="#a78bfa" stroke-width="0.8"/>
+        <text x="66" y="197" font-size="7.5" fill="#4c1d95" text-anchor="middle" dominant-baseline="central">construct paymentGroup</text>
+
+        <!-- 4 sign ARC-52 -->
+        <rect x="10" y="212" width="112" height="18" rx="4" fill="#ede9fe" stroke="#a78bfa" stroke-width="0.8"/>
+        <text x="66" y="221" font-size="7.5" fill="#4c1d95" text-anchor="middle" dominant-baseline="central">sign · ARC-52 wallet</text>
+
+        <!-- 5 PAYMENT-SIGNATURE header -->
+        <text x="148" y="243" font-size="8.5" fill="#475569" text-anchor="middle">5 · PAYMENT-SIGNATURE header</text>
+        <line x1="65" y1="249" x2="222" y2="249" stroke="#16a34a" stroke-width="1.2" marker-end="url(#arr-g)"/>
+
+        <!-- 6 KYA score check — Verun internal -->
+        <rect x="170" y="261" width="118" height="18" rx="4" fill="#e0f2fe" stroke="#0891b2" stroke-width="0.8"/>
+        <text x="229" y="270" font-size="7.5" fill="#0c4a6e" text-anchor="middle" dominant-baseline="central">KYA score check</text>
+
+        <!-- 7 forward paymentGroup -->
+        <text x="315" y="292" font-size="8.5" fill="#475569" text-anchor="middle">7 · forward paymentGroup</text>
+        <line x1="229" y1="298" x2="395" y2="298" stroke="#d97706" stroke-width="1.2" marker-end="url(#arr-o)"/>
+
+        <!-- 8 read ASA trust token GoPlausible→Algorand -->
+        <text x="506" y="317" font-size="8.5" fill="#475569" text-anchor="middle">8 · read ASA trust token</text>
+        <line x1="402" y1="323" x2="604" y2="323" stroke="#2563eb" stroke-width="1" stroke-dasharray="3 2" marker-end="url(#arr-b)"/>
+        <text x="506" y="339" font-size="8.5" fill="#475569" text-anchor="middle">[token valid · score ok]</text>
+        <line x1="611" y1="345" x2="409" y2="345" stroke="#2563eb" stroke-width="1" stroke-dasharray="3 2" marker-end="url(#arr-b)"/>
+
+        <!-- 9 simulate paymentGroup -->
+        <text x="506" y="364" font-size="8.5" fill="#475569" text-anchor="middle">9 · simulate paymentGroup</text>
+        <line x1="402" y1="370" x2="604" y2="370" stroke="#2563eb" stroke-width="1.2" marker-end="url(#arr-b)"/>
+        <text x="506" y="386" font-size="8.5" fill="#475569" text-anchor="middle">[simulation success]</text>
+        <line x1="611" y1="392" x2="409" y2="392" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#arr-b)"/>
+
+        <!-- 11 payment verified -->
+        <rect x="338" y="403" width="128" height="18" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="0.8"/>
+        <text x="402" y="412" font-size="7.5" fill="#78350f" text-anchor="middle" dominant-baseline="central">payment verified</text>
+
+        <!-- 12 submit paymentGroup -->
+        <text x="506" y="434" font-size="8.5" fill="#475569" text-anchor="middle">12 · submit paymentGroup</text>
+        <line x1="402" y1="440" x2="604" y2="440" stroke="#2563eb" stroke-width="1.2" marker-end="url(#arr-b)"/>
+
+        <!-- 13 instant finality box -->
+        <rect x="516" y="450" width="190" height="18" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="0.8"/>
+        <text x="611" y="459" font-size="7.5" fill="#1e3a8a" text-anchor="middle" dominant-baseline="central">instant finality · ~3.3s</text>
+
+        <!-- 14 transaction result -->
+        <text x="506" y="479" font-size="8.5" fill="#475569" text-anchor="middle">transaction result</text>
+        <line x1="611" y1="485" x2="409" y2="485" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#arr-b)"/>
+
+        <!-- 15 settlement confirmed -->
+        <text x="315" y="502" font-size="8.5" fill="#475569" text-anchor="middle">settlement confirmed</text>
+        <line x1="402" y1="508" x2="236" y2="508" stroke="#d97706" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#arr-o)"/>
+
+        <!-- 16 200 OK + resource -->
+        <rect x="152" y="518" width="155" height="20" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="0.8"/>
+        <text x="229" y="528" font-size="8" fill="#166534" text-anchor="middle" dominant-baseline="central">200 OK + resource</text>
+        <line x1="229" y1="538" x2="72" y2="538" stroke="#16a34a" stroke-width="1.2" marker-end="url(#arr-g)"/>
+
+        <!-- 17 lead referral on-chain -->
+        <text x="315" y="556" font-size="8.5" fill="#475569" text-anchor="middle">17 · write lead referral on-chain</text>
+        <line x1="229" y1="562" x2="604" y2="562" stroke="#0891b2" stroke-width="1" stroke-dasharray="3 2" marker-end="url(#arr-t)"/>
+        <text x="506" y="576" font-size="8.5" fill="#475569" text-anchor="middle">[referral tx confirmed]</text>
+        <line x1="611" y1="582" x2="236" y2="582" stroke="#0891b2" stroke-width="1" stroke-dasharray="3 2" marker-end="url(#arr-t)"/>
+
+        <!-- ── ERROR PATHS banner ── -->
+        <rect x="10" y="600" width="700" height="16" rx="3" fill="#fee2e2"/>
+        <text x="360" y="611" font-size="8" font-weight="700" fill="#7f1d1d" text-anchor="middle">ERROR PATHS</text>
+
+        <!-- E1 KYA score too low -->
+        <rect x="170" y="626" width="118" height="18" rx="4" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.8"/>
+        <text x="229" y="635" font-size="7.5" fill="#7f1d1d" text-anchor="middle" dominant-baseline="central">KYA score too low</text>
+        <text x="148" y="657" font-size="8.5" fill="#dc2626" text-anchor="middle">402 (agent not verified)</text>
+        <line x1="229" y1="663" x2="72" y2="663" stroke="#dc2626" stroke-width="1.1" marker-end="url(#arr-r)"/>
+
+        <!-- E2 ASA token invalid -->
+        <text x="506" y="686" font-size="8.5" fill="#dc2626" text-anchor="middle">read ASA trust token</text>
+        <line x1="402" y1="692" x2="604" y2="692" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="3 3" marker-end="url(#arr-r)"/>
+        <text x="506" y="707" font-size="8.5" fill="#dc2626" text-anchor="middle">[token missing / invalid]</text>
+        <line x1="611" y1="713" x2="409" y2="713" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="3 3" marker-end="url(#arr-r)"/>
+        <text x="315" y="728" font-size="8.5" fill="#dc2626" text-anchor="middle">402 (ASA token invalid)</text>
+        <line x1="402" y1="734" x2="236" y2="734" stroke="#dc2626" stroke-width="1.1" marker-end="url(#arr-r)"/>
+        <line x1="229" y1="748" x2="72" y2="748" stroke="#dc2626" stroke-width="1.1" marker-end="url(#arr-r)"/>
+        <text x="148" y="758" font-size="8.5" fill="#dc2626" text-anchor="middle">402 (ASA token invalid)</text>
+
+        <!-- E3 ARC-52 sig invalid -->
+        <text x="315" y="778" font-size="8.5" fill="#dc2626" text-anchor="middle">verify paymentGroup</text>
+        <line x1="229" y1="784" x2="395" y2="784" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="3 3" marker-end="url(#arr-r)"/>
+        <rect x="338" y="792" width="128" height="18" rx="4" fill="#fee2e2" stroke="#fca5a5" stroke-width="0.8"/>
+        <text x="402" y="801" font-size="7.5" fill="#7f1d1d" text-anchor="middle" dominant-baseline="central">ARC-52 sig invalid</text>
+        <text x="315" y="822" font-size="8.5" fill="#dc2626" text-anchor="middle">402 (invalid signature)</text>
+        <line x1="402" y1="828" x2="236" y2="828" stroke="#dc2626" stroke-width="1.1" marker-end="url(#arr-r)"/>
+        <line x1="229" y1="842" x2="72" y2="842" stroke="#dc2626" stroke-width="1.1" marker-end="url(#arr-r)"/>
+        <text x="148" y="853" font-size="8.5" fill="#dc2626" text-anchor="middle">402 (invalid signature)</text>
+
+        <!-- E4 simulation fail -->
+        <text x="506" y="872" font-size="8.5" fill="#dc2626" text-anchor="middle">simulate paymentGroup</text>
+        <line x1="402" y1="878" x2="604" y2="878" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="3 3" marker-end="url(#arr-r)"/>
+        <text x="506" y="893" font-size="8.5" fill="#dc2626" text-anchor="middle">[simulation fail]</text>
+        <line x1="611" y1="899" x2="409" y2="899" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="3 3" marker-end="url(#arr-r)"/>
+        <text x="315" y="914" font-size="8.5" fill="#dc2626" text-anchor="middle">402 (invalid payment)</text>
+        <line x1="402" y1="920" x2="236" y2="920" stroke="#dc2626" stroke-width="1.1" marker-end="url(#arr-r)"/>
+        <line x1="229" y1="934" x2="72" y2="934" stroke="#dc2626" stroke-width="1.1" marker-end="url(#arr-r)"/>
+        <text x="148" y="944" font-size="8.5" fill="#dc2626" text-anchor="middle">402 (invalid payment)</text>
+
+        <!-- Bottom lane footers -->
+        <line x1="10" y1="960" x2="710" y2="960" stroke="#e2e8f0" stroke-width="0.8"/>
+        <rect x="10" y="968" width="110" height="30" rx="7" fill="#ede9fe" stroke="#7c3aed" stroke-width="1"/>
+        <text x="65" y="983" font-size="10" font-weight="700" fill="#4c1d95" text-anchor="middle" dominant-baseline="central">AI Agent</text>
+        <rect x="170" y="968" width="118" height="30" rx="7" fill="#e0f2fe" stroke="#0891b2" stroke-width="1"/>
+        <text x="229" y="983" font-size="10" font-weight="700" fill="#0c4a6e" text-anchor="middle" dominant-baseline="central">Verun</text>
+        <rect x="338" y="968" width="128" height="30" rx="7" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+        <text x="402" y="983" font-size="10" font-weight="700" fill="#78350f" text-anchor="middle" dominant-baseline="central">GoPlausible</text>
+        <rect x="516" y="968" width="190" height="30" rx="7" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+        <text x="611" y="983" font-size="10" font-weight="700" fill="#1e3a8a" text-anchor="middle" dominant-baseline="central">Algorand</text>
+
+        <!-- Legend -->
+        <line x1="20" y1="1014" x2="56" y2="1014" stroke="#16a34a" stroke-width="1.2" marker-end="url(#arr-g)"/>
+        <text x="62" y="1014" font-size="8" fill="#475569" dominant-baseline="central">request / response</text>
+        <line x1="220" y1="1014" x2="256" y2="1014" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="5 3" marker-end="url(#arr-b)"/>
+        <text x="262" y="1014" font-size="8" fill="#475569" dominant-baseline="central">chain call / result</text>
+        <line x1="430" y1="1014" x2="466" y2="1014" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arr-r)"/>
+        <text x="472" y="1014" font-size="8" fill="#475569" dominant-baseline="central">error path</text>
+
+        <!-- Note -->
+        <rect x="10" y="1028" width="700" height="26" rx="6" fill="rgba(0,180,216,0.07)" stroke="#0891b2" stroke-width="0.8"/>
+        <text x="360" y="1041" font-size="8" fill="#0c4a6e" text-anchor="middle" dominant-baseline="central">Verun KYA score + ASA trust token (Algorand) · GoPlausible x402 · ARC-52 mandatory · lead referral on-chain after settlement</text>
+
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION: VALIDATORS
+═══════════════════════════════════════════════════════════ -->
+<section id="section-validators" style="position:relative;z-index:1;padding:80px 40px;max-width:1100px;margin:0 auto;border-top:1px solid var(--border2)">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+    <span style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--violet);letter-spacing:3px;text-transform:uppercase">◉ Validator Network</span>
+  </div>
+  <h2 style="font-size:38px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.1">Every regulated institution <span style="background:linear-gradient(135deg,#8b5cf6,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">earns 10%.</span></h2>
+  <p style="font-size:16px;color:var(--text2);max-width:560px;line-height:1.7;margin-bottom:48px">Zero setup. We host the node. Each institution earns 10% of every evaluation fee from agents on their network — automatic, on-chain, no invoice.</p>
+
+  <!-- Revenue split bar -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:32px">
+    <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:2px;margin-bottom:16px">FEE SPLIT · PER EVALUATION</div>
+    <div style="display:flex;gap:2px;height:12px;border-radius:6px;overflow:hidden;margin-bottom:12px">
+      <div style="width:70%;background:var(--teal);border-radius:4px 0 0 4px"></div>
+      <div style="width:10%;background:var(--violet)"></div>
+      <div style="width:10%;background:var(--green)"></div>
+      <div style="width:10%;background:var(--bg4);border-radius:0 4px 4px 0"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-family:var(--mono);font-size:10px">
+      <div><span style="color:var(--teal)">70%</span> <span style="color:var(--text3)">Protocol treasury</span></div>
+      <div><span style="color:var(--violet)">10%</span> <span style="color:var(--text3)">Validator node</span></div>
+      <div><span style="color:var(--green)">10%</span> <span style="color:var(--text3)">Agent kickback</span></div>
+      <div><span style="color:var(--text3)">10%</span> <span style="color:var(--text3)">Reserve</span></div>
+    </div>
+  </div>
+
+  <!-- Validator Roadmap -->
+  <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--text3);letter-spacing:2px;margin-bottom:20px">VALIDATOR ROADMAP</div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <!-- tokenforge — PILOT -->
+    <div style="background:var(--bg2);border:1px solid rgba(16,185,129,0.4);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px">
+      <div style="width:48px;height:48px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">🔧</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+          <span style="font-size:15px;font-weight:600;color:var(--text)">tokenforge</span>
+          <span style="font-family:var(--mono);font-size:8px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3)">PILOT</span>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.5">MiCAR/eWpG-compliant White-Label platform · 30+ TokenSuite deployments across 5 countries · Founding Validator · tokenforge = Validator Node 1</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px">NODE 1 · ACTIVE</div>
+        <div style="font-family:var(--mono);font-size:11px;color:#10b981;margin-top:4px">✓ In Pilot</div>
+      </div>
+    </div>
+
+    <!-- BCP Partners — PILOT -->
+    <div style="background:var(--bg2);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px">
+      <div style="width:48px;height:48px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;padding:6px">
+        <img src="data:image/png;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf//Z" style="width:100%;height:100%;object-fit:contain" alt="BCP Partners">
+      </div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+          <span style="font-size:15px;font-weight:600;color:var(--text)">BCP Partners</span>
+          <span style="font-family:var(--mono);font-size:8px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3)">PILOT</span>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.5">Investor network · Referral distribution · KYA pre-verification for HNWI investors · Lead attribution on-chain</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px">NODE 2 · ACTIVE</div>
+        <div style="font-family:var(--mono);font-size:11px;color:#10b981;margin-top:4px">✓ In Pilot</div>
+      </div>
+    </div>
+
+    <!-- Cashlink — PLANNED -->
+    <div style="background:var(--bg2);border:1px solid rgba(0,180,216,0.2);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px">
+      <div style="width:48px;height:48px;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">🏦</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+          <span style="font-size:15px;font-weight:600;color:var(--text)">Cashlink</span>
+          <span style="font-family:var(--mono);font-size:8px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(0,180,216,0.1);color:var(--teal);border:1px solid rgba(0,180,216,0.25)">PLANNED</span>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.5">BaFin-licensed eWpG Registrar · ISIN assignment · Security token issuance · Germany's leading tokenization infrastructure</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px">NODE 3 · PLANNED</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--teal);margin-top:4px">Q3 2026</div>
+      </div>
+    </div>
+
+    <!-- Bitbond — PLANNED -->
+    <div style="background:var(--bg2);border:1px solid rgba(0,180,216,0.2);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px">
+      <div style="width:48px;height:48px;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">🏛</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+          <span style="font-size:15px;font-weight:600;color:var(--text)">Bitbond</span>
+          <span style="font-family:var(--mono);font-size:8px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(0,180,216,0.1);color:var(--teal);border:1px solid rgba(0,180,216,0.25)">PLANNED</span>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.5">BaFin regulated · Security Token Bank · Berlin · Institutional-grade token issuance infrastructure</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px">NODE 4 · PLANNED</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--teal);margin-top:4px">Q3 2026</div>
+      </div>
+    </div>
+
+    <!-- NYALA — PLANNED -->
+    <div style="background:var(--bg2);border:1px solid rgba(0,180,216,0.2);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px">
+      <div style="width:48px;height:48px;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px">⚖️</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+          <span style="font-size:15px;font-weight:600;color:var(--text)">NYALA Digital Asset AG</span>
+          <span style="font-family:var(--mono);font-size:8px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(0,180,216,0.1);color:var(--teal);border:1px solid rgba(0,180,216,0.25)">PLANNED</span>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.5">BaFin-licensed Registrar · Native tokenforge integration · eWpG alternative/complement to Cashlink · Germany</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px">NODE 5 · PLANNED</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--teal);margin-top:4px">Q4 2026</div>
+      </div>
+    </div>
+
+    <!-- Algorand Foundation — PLANNED -->
+    <div style="background:var(--bg2);border:1px solid rgba(0,180,216,0.35);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,180,216,0.04),transparent);pointer-events:none"></div>
+      <div style="width:48px;height:48px;background:rgba(0,180,216,0.12);border:1px solid rgba(0,180,216,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--mono);font-size:18px;font-weight:700;color:var(--teal)">◈</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+          <span style="font-size:15px;font-weight:600;color:var(--text)">Algorand Foundation</span>
+          <span style="font-family:var(--mono);font-size:8px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(0,180,216,0.12);color:var(--teal);border:1px solid rgba(0,180,216,0.3)">GRANT TARGET</span>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.5">Algorand Foundation as strategic validator · Trust layer built natively on Algorand · GoPlausible x402 + ASA Trust Token · Grant application in progress (50K–200K USDC)</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--teal);letter-spacing:1px">STRATEGIC</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--teal);margin-top:4px">In discussion</div>
+      </div>
+    </div>
+
+    <!-- Open slot -->
+    <div style="background:var(--bg3);border:1px dashed var(--border2);border-radius:12px;padding:20px 24px;display:flex;align-items:center;gap:20px">
+      <div style="width:48px;height:48px;background:var(--bg4);border:1px dashed var(--border2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px;opacity:0.4">+</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:500;color:var(--text3);margin-bottom:4px">Your Institution Here</div>
+        <div style="font-size:12px;color:var(--text3);line-height:1.5">BaFin-regulated financial institutions · Custodians · Token platforms · Investment networks · Zero setup required</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px">OPEN SLOT</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:4px">10% auto-earned</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="position:relative;z-index:1;border-top:1px solid var(--border2);padding:32px 40px;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:gap">
+  <div style="font-family:var(--mono);font-size:11px;color:var(--text3)">◈ VERUN.NETWORK &nbsp;·&nbsp; Algorand Trust Layer by ERSTER &nbsp;·&nbsp; March 2026</div>
+  <div style="font-family:var(--mono);font-size:10px;color:var(--text3)">This demo simulates the full flow &nbsp;·&nbsp; not connected to live chain</div>
+</footer>
+
+<footer style="position:relative;z-index:1;text-align:center;padding:16px 40px 24px;border-top:1px solid rgba(0,180,216,0.05)">
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#4a6e82;letter-spacing:1.5px">
+    IMPRESSUM &nbsp;·&nbsp; <a href="https://www.bcpp.io" target="_blank" style="color:#4a6e82;text-decoration:none">BCP Partners · www.bcpp.io</a>
+  </p>
+</footer>
+
+<script>
 function checkPw(){
   var val = document.getElementById('pw-input').value;
   if(val === 'HalloAlgorand'){
-    sessionStorage.setItem('verun_auth','1');
     document.getElementById('pw-gate').classList.add('hidden');
   } else {
     var err = document.getElementById('pw-error');
     err.textContent = 'incorrect password';
-    setTimeout(function(){ err.textContent=''; }, 2000);
-    document.getElementById('pw-input').value='';
+    setTimeout(()=>{ err.textContent=''; }, 2000);
   }
 }
 </script>
-
-<footer class="impressum">
-  <p>© BCP PARTNERS · <a href="https://www.bcpp.io" target="_blank">www.bcpp.io</a> · IMPRESSUM</p>
-</footer>
 
 </body>
 </html>
