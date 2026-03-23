@@ -8,6 +8,45 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
+/* ── PASSWORD GATE ── */
+#pw-gate{
+  position:fixed;inset:0;z-index:9999;
+  background:#060d14;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:24px;
+}
+#pw-gate.hidden{display:none}
+.pw-logo{height:48px;width:auto;margin-bottom:8px}
+.pw-title{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;
+  color:#00B4D8;letter-spacing:3px;text-transform:uppercase;
+}
+.pw-sub{
+  font-family:'Space Grotesk',sans-serif;font-size:13px;color:#4a6e82;
+  letter-spacing:1px;
+}
+.pw-form{display:flex;gap:10px;align-items:center}
+.pw-input{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;
+  background:#0a1520;color:#e8f4f8;
+  border:1px solid rgba(0,180,216,0.3);border-radius:6px;
+  padding:10px 16px;outline:none;width:220px;letter-spacing:1px;
+  transition:border-color .2s;
+}
+.pw-input:focus{border-color:#00B4D8}
+.pw-btn{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  background:#00B4D8;color:#060d14;
+  border:none;padding:11px 20px;border-radius:6px;
+  cursor:pointer;transition:background .2s;
+}
+.pw-btn:hover{background:#0dd6ff}
+.pw-error{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  color:#ef4444;letter-spacing:1px;min-height:16px;
+}
+
 :root{
   --bg:#060d14;
   --bg2:#0a1520;
@@ -30,6 +69,20 @@
   --sans:'Space Grotesk',sans-serif;
   --radius:10px;
 }
+
+/* ── FOOTER ── */
+footer.impressum{
+  position:relative;z-index:1;
+  text-align:center;padding:24px 40px;
+  border-top:1px solid rgba(0,180,216,0.08);
+  margin-top:40px;
+}
+footer.impressum p{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  color:#4a6e82;letter-spacing:1.5px;
+}
+footer.impressum a{color:#4a6e82;text-decoration:none;transition:color .2s}
+footer.impressum a:hover{color:#00B4D8}
 
 html{scroll-behavior:smooth}
 body{
@@ -485,8 +538,26 @@ nav{
 </head>
 <body>
 
+<!-- Password Gate -->
+<div id="pw-gate">
+  <img src="logo.png" class="pw-logo" alt="BCP Partners">
+  <div class="pw-title">◈ VERUN.NETWORK</div>
+  <div class="pw-sub">verun.network by erster — restricted access</div>
+  <div class="pw-form">
+    <input class="pw-input" id="pw-input" type="password" placeholder="enter password" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="pw-btn" onclick="checkPw()">Enter →</button>
+  </div>
+  <div class="pw-error" id="pw-error"></div>
+</div>
+
 <nav>
-  <div class="nav-brand">◈ VERUN<span>.NETWORK</span></div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <img src="logo.png" style="height:28px;width:auto" alt="BCP Partners">
+    <div>
+      <div class="nav-brand">◈ VERUN<span>.NETWORK</span></div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:2px">by erster</div>
+    </div>
+  </div>
   <div class="nav-links">
     <a href="#">overview</a>
     <a href="#">kya protocol</a>
@@ -1075,6 +1146,30 @@ function prevStep() {
 
 // ── Init ──
 renderStep();
+
+// ── Password Gate ──
+(function(){
+  if(sessionStorage.getItem('verun_auth')==='1'){
+    document.getElementById('pw-gate').classList.add('hidden');
+  }
+})();
+function checkPw(){
+  var val = document.getElementById('pw-input').value;
+  if(val === 'HalloAlgorand'){
+    sessionStorage.setItem('verun_auth','1');
+    document.getElementById('pw-gate').classList.add('hidden');
+  } else {
+    var err = document.getElementById('pw-error');
+    err.textContent = 'incorrect password';
+    setTimeout(function(){ err.textContent=''; }, 2000);
+    document.getElementById('pw-input').value='';
+  }
+}
 </script>
+
+<footer class="impressum">
+  <p>© BCP PARTNERS · <a href="https://www.bcpp.io" target="_blank">www.bcpp.io</a> · IMPRESSUM</p>
+</footer>
+
 </body>
 </html>
